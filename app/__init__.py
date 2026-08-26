@@ -33,6 +33,9 @@ def create_app(config_object: object | None = None) -> Flask:
     _register_blueprints(app)
     register_error_handlers(app)
     register_jwt_callbacks(app)
+    from app.courses.seed import register_seed_command
+
+    register_seed_command(app)
 
     return app
 
@@ -57,10 +60,12 @@ def _initialize_extensions(app: Flask) -> None:
 def _register_blueprints(app: Flask) -> None:
     from app import models as _models  # noqa: F401
     from app.auth.routes import auth_blueprint
+    from app.courses.routes import courses_blueprint
     from app.enrollments.routes import enrollments_blueprint
     from app.users.routes import users_blueprint
 
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(courses_blueprint)
     app.register_blueprint(enrollments_blueprint)
     app.register_blueprint(users_blueprint)
 

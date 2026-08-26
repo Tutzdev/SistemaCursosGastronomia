@@ -3,21 +3,11 @@ from collections.abc import Callable, Generator
 import pytest
 from flask import Flask
 from flask.testing import FlaskClient
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
 
 from app import create_app
 from app.extensions import db
-
-
-class Course(db.Model):
-    __tablename__ = "courses"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str] = mapped_column(String(160), nullable=False)
-    description: Mapped[str | None] = mapped_column(String(500))
-    thumbnail_url: Mapped[str | None] = mapped_column(String(500))
-    level: Mapped[str] = mapped_column(String(30), nullable=False)
+from app.models import Category, Course, CourseLevel, User, UserRole
+from app.security import hash_password
 
 
 @pytest.fixture
@@ -92,11 +82,28 @@ def create_course(app: Flask) -> Callable[..., Course]:
         level: str = "BEGINNER",
     ) -> Course:
         with app.app_context():
+            instructor = db.session.scalar(
+                db.select(User).where(User.email == "chef@example.com")
+            )
+            if instructor is None:
+                instructor = User(
+                    name="Chef Demo",
+                    email="chef@example.com",
+                    password_hash=hash_password("secure-password"),
+                    role=UserRole.INSTRUCTOR,
+                )
+                db.session.add(instructor)
+            category = db.session.scalar(db.select(Category).limit(1))
+            if category is None:
+                category = Category(name="Pizzas", slug="pizzas")
+                db.session.add(category)
             course = Course(
                 title=title,
                 description=description,
                 thumbnail_url=thumbnail_url,
-                level=level,
+                level=CourseLevel(level),
+                instructor=instructor,
+                category=category,
             )
             db.session.add(course)
             db.session.commit()
