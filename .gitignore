@@ -1,16 +1,49 @@
+# Environment variables and local secrets
 .env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Local agent instructions
+AGENTS.md
+
+# Virtual environments
 .venv/
 venv/
+env/
+
+# Python caches and compiled files
 __pycache__/
 *.py[cod]
+*$py.class
+
+# Tests, coverage, linting, and type checking
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.pyright/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Packaging artifacts
 build/
 dist/
 *.egg-info/
+
+# Local application data
 instance/
 *.db
 *.sqlite
 *.sqlite3
-AGENTS.md
-.env.example
+*.log
+
+# IDE and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
