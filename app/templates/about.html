@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block title %}Sobre — Cursos{% endblock %}
+
+{% block main %}
+<main id="conteudo" class="inner-page">
+  <section class="page-hero about-page-hero">
+    <div class="page-hero-image" aria-hidden="true"></div>
+    <div class="page-hero-shade" aria-hidden="true"></div>
+    <div class="shell page-hero-content reveal">
+      <nav class="breadcrumbs" aria-label="Navegação estrutural"><a href="{{ url_for('index') }}">Início</a><span>/</span><span>Sobre</span></nav>
+      <p class="eyebrow light">NOSSA HISTÓRIA</p>
+      <h1>Cozinhar transforma.<br><em>Ensinar também.</em></h1>
+      <p>Conheça a escola que aproxima técnica profissional, afeto e a cozinha de todos os dias.</p>
+    </div>
+  </section>
+
+  <section class="about-intro section">
+    <div class="shell about-intro-grid">
+      <div>
+        <p class="eyebrow">DE ONDE VIEMOS</p>
+        <h2>Uma escola criada<br>ao redor da mesa.</h2>
+      </div>
+      <div class="about-intro-copy">
+        <p class="lead">A Cursos nasceu de uma ideia simples: técnica boa é técnica compartilhada com clareza.</p>
+        <p>Reunimos chefs, padeiros e confeiteiros que sabem fazer — e sabem ensinar. Cada formação é construída para funcionar na cozinha real, com ingredientes possíveis, explicações diretas e espaço para você desenvolver seu próprio jeito.</p>
+        <p>Não ensinamos apenas receitas. Ensinamos decisões: como observar uma massa, equilibrar sabores, corrigir caminhos e ganhar confiança para criar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-numbers">
+    <div class="shell numbers-grid">
+      <div><strong>6</strong><span>formações completas</span></div>
+      <div><strong>171</strong><span>aulas práticas</span></div>
+      <div><strong>100%</strong><span>online e no seu ritmo</span></div>
+      <div><strong>∞</strong><span>acesso vitalício</span></div>
+    </div>
+  </section>
+
+  <section class="values-section section">
+    <div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">NO QUE ACREDITAMOS</p><h2>Nosso jeito de ensinar</h2></div></div>
+      <div class="values-grid">
+        <article><span>01</span><h3>Clareza antes de tudo</h3><p>Explicamos o porquê de cada etapa para que você aprenda a decidir, não apenas repetir.</p></article>
+        <article><span>02</span><h3>Prática que cabe na rotina</h3><p>Aulas objetivas, acesso vitalício e técnicas adaptáveis aos equipamentos que você já tem.</p></article>
+        <article><span>03</span><h3>Respeito aos ingredientes</h3><p>Menos desperdício, mais atenção à sazonalidade e escolhas que valorizam cada produto.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-cta-strip">
+    <div class="shell site-cta-inner">
+      <div><p class="eyebrow light">VAMOS COZINHAR?</p><h2>Seu próximo prato começa aqui.</h2></div>
+      <a class="button button-primary" href="{{ url_for('courses_page') }}">Explorar cursos <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+{% endblock %}

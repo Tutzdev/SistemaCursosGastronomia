@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+
+{% block title %}Contato — Cursos{% endblock %}
+
+{% block main %}
+<main id="conteudo" class="inner-page">
+  <section class="page-hero contact-page-hero">
+    <div class="shell page-hero-content reveal">
+      <nav class="breadcrumbs" aria-label="Navegação estrutural"><a href="{{ url_for('index') }}">Início</a><span>/</span><span>Contato</span></nav>
+      <p class="eyebrow light">FALE COM A GENTE</p>
+      <h1>Estamos aqui para<br><em>ajudar você.</em></h1>
+      <p>Dúvidas sobre os cursos, acesso ou pagamento? Nossa equipe responde com carinho e sem enrolação.</p>
+    </div>
+  </section>
+
+  <section class="contact-page-section section">
+    <div class="shell contact-page-grid">
+      <div class="contact-info-column">
+        <p class="eyebrow">ATENDIMENTO</p>
+        <h2>Vamos conversar?</h2>
+        <p>Preencha o formulário e responderemos em até um dia útil.</p>
+        <div class="contact-methods">
+          <a href="mailto:ola@cursos.com.br"><span aria-hidden="true">@</span><div><small>E-MAIL</small><strong>ola@cursos.com.br</strong></div></a>
+          <div><span aria-hidden="true">◷</span><div><small>HORÁRIO</small><strong>Segunda a sexta, 9h às 18h</strong></div></div>
+          <div><span aria-hidden="true">⌂</span><div><small>ONDE ESTAMOS</small><strong>Online, para todo o Brasil</strong></div></div>
+        </div>
+      </div>
+
+      <form class="contact-page-form" id="contact-page-form">
+        <div class="form-row">
+          <label>Nome completo<input type="text" name="name" placeholder="Como podemos chamar você?" required></label>
+          <label>E-mail<input type="email" name="email" placeholder="voce@exemplo.com" required></label>
+        </div>
+        <label>Assunto
+          <select name="subject" required>
+            <option value="">Selecione uma opção</option>
+            <option>Dúvida sobre um curso</option>
+            <option>Pagamento e inscrição</option>
+            <option>Acesso às aulas</option>
+            <option>Certificado</option>
+            <option>Outro assunto</option>
+          </select>
+        </label>
+        <label>Mensagem<textarea name="message" rows="6" placeholder="Conte para a gente como podemos ajudar..." required></textarea></label>
+        <button class="button button-primary" type="submit">Enviar mensagem <span aria-hidden="true">→</span></button>
+        <small>Seus dados serão usados apenas para responder a esta mensagem.</small>
+      </form>
+    </div>
+  </section>
+
+  <section class="faq-section section" aria-labelledby="faq-title">
+    <div class="shell faq-grid">
+      <div><p class="eyebrow">DÚVIDAS FREQUENTES</p><h2 id="faq-title">Talvez a resposta<br>já esteja aqui.</h2></div>
+      <div class="faq-list">
+        <article class="faq-item"><button type="button" data-faq-toggle aria-expanded="false"><span>Por quanto tempo tenho acesso ao curso?</span><b aria-hidden="true">+</b></button><p hidden>O acesso é vitalício. Você pode assistir às aulas quantas vezes quiser e no seu próprio ritmo.</p></article>
+        <article class="faq-item"><button type="button" data-faq-toggle aria-expanded="false"><span>Preciso ter experiência na cozinha?</span><b aria-hidden="true">+</b></button><p hidden>Não. Os cursos indicam o nível e começam pelos fundamentos necessários para acompanhar todo o conteúdo.</p></article>
+        <article class="faq-item"><button type="button" data-faq-toggle aria-expanded="false"><span>Recebo certificado?</span><b aria-hidden="true">+</b></button><p hidden>Sim. Ao concluir as aulas, seu certificado digital fica disponível para download.</p></article>
+        <article class="faq-item"><button type="button" data-faq-toggle aria-expanded="false"><span>Posso assistir pelo celular?</span><b aria-hidden="true">+</b></button><p hidden>Sim. A plataforma funciona em computadores, tablets e celulares.</p></article>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cursos online de gastronomia para transformar ingredientes em experiências memoráveis.">
+    <meta name="theme-color" content="#073f2c">
+    <title>{% block title %}Cursos — Gastronomia online{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </head>
+  <body data-page="{{ request.endpoint }}">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="site-header" id="inicio">
+      <div class="header-inner shell">
+        <a class="brand" href="{{ url_for('index') }}" aria-label="Cursos, voltar ao início">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M15 19.5c-5.1-.7-7.8-4.8-6.6-8.4 1.2-3.5 5.7-5.1 9.2-2.8C19.2 4.5 22.4 3 25.5 4c2.8.9 4.3 3.4 4.1 6 3.5-2.1 7.7-.5 8.9 2.9 1.2 3.6-1.4 7.5-6 8.2"/>
+              <path d="M14.5 18.5v16.2c0 2.1 1.7 3.8 3.8 3.8h11.4c2.1 0 3.8-1.7 3.8-3.8V18.5M19 29h10M19 34h10"/>
+            </svg>
+          </span>
+          <span class="brand-name">Cursos</span>
+          <span class="brand-caption">GASTRONOMIA ONLINE</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Navegação principal">
+          <a class="nav-link {{ 'active' if request.endpoint == 'index' else '' }}" href="{{ url_for('index') }}">Início</a>
+          <a class="nav-link {{ 'active' if request.endpoint in ('courses_page', 'course_page') else '' }}" href="{{ url_for('courses_page') }}">Cursos</a>
+          <a class="nav-link {{ 'active' if request.endpoint == 'about_page' else '' }}" href="{{ url_for('about_page') }}">Sobre</a>
+          <a class="nav-link {{ 'active' if request.endpoint == 'contact_page' else '' }}" href="{{ url_for('contact_page') }}">Contato</a>
+        </nav>
+
+        <div class="header-actions">
+          <form class="search-form" id="search-form" role="search">
+            <label class="sr-only" for="course-search">Buscar cursos</label>
+            <input id="course-search" type="search" placeholder="Buscar cursos..." autocomplete="off">
+            <button type="submit" aria-label="Buscar">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+            </button>
+          </form>
+          <button class="icon-button login-button" type="button" aria-label="Entrar" title="Login">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4.5 21v-2.5a7.5 7.5 0 0 1 15 0V21z"/></svg>
+          </button>
+          <button class="icon-button cart-trigger" type="button" aria-label="Abrir carrinho" aria-controls="cart-drawer" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2 12h10.5l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+            <span class="cart-count" id="cart-count" aria-label="0 itens">0</span>
+          </button>
+          <button class="menu-button" id="menu-button" type="button" aria-label="Abrir menu" aria-controls="mobile-nav" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação móvel" hidden>
+        <a href="{{ url_for('index') }}">Início</a>
+        <a href="{{ url_for('courses_page') }}">Cursos</a>
+        <a href="{{ url_for('about_page') }}">Sobre</a>
+        <a href="{{ url_for('contact_page') }}">Contato</a>
+      </nav>
+    </header>
+
+    {% block main %}
+    <main id="conteudo">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-background" aria-hidden="true"></div>
+        <div class="hero-content shell">
+          <div class="hero-copy reveal">
+            <p class="eyebrow light">APRENDA COM QUEM AMA O QUE FAZ</p>
+            <h1 id="hero-title">Transforme<br>ingredientes em<br><em>experiências inesquecíveis</em></h1>
+            <div class="tricolor-line" aria-hidden="true"><span></span><span></span><span></span></div>
+            <p class="hero-description">Cursos completos, receitas autorais e técnicas profissionais para você cozinhar com mais confiança — no seu ritmo, do seu jeito.</p>
+            <button class="button button-primary scroll-to-courses" type="button">
+              Ver todos os cursos
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits" aria-label="Vantagens">
+        <div class="benefits-grid shell">
+          <article class="benefit">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 21c-5-.8-7-5-5-8.5 1.8-3.2 6.3-3.9 9-1.2 1-4.2 5.3-6.4 9-4.8 2.3 1 3.6 3.2 3.5 5.5 3.1-2.5 7.8-1.1 8.7 2.6.8 3.2-1.5 6.5-5.2 7.2V37H14z"/><path d="M19 28h10M19 33h10"/></svg>
+            <div><h2>Aulas 100% online</h2><p>Assista quando e onde quiser</p></div>
+          </article>
+          <article class="benefit">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5s6.7 5 14 6.5V23c0 9.5-6.4 16.2-14 20-7.6-3.8-14-10.5-14-20V11.5C17.3 10 24 5 24 5z"/><path d="m17 24 5 5 10-11"/></svg>
+            <div><h2>Pagamento seguro</h2><p>Seus dados sempre protegidos</p></div>
+          </article>
+          <article class="benefit">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="10" width="34" height="27" rx="7"/><path d="m21 18 9 5.5-9 5.5z"/></svg>
+            <div><h2>Acesso imediato</h2><p>Comece assim que se inscrever</p></div>
+          </article>
+          <article class="benefit">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M11 6h24v30H11z"/><path d="M17 13h12M17 19h9"/><circle cx="34" cy="34" r="8"/><path d="m31 40-1 5 4-2 4 2-1-5"/></svg>
+            <div><h2>Certificado incluso</h2><p>Valorize seu conhecimento</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="courses-section section" id="cursos" aria-labelledby="courses-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">CURSOS EM DESTAQUE</p>
+              <h2 id="courses-title">Sabores que inspiram, <em>técnicas que ficam</em></h2>
+            </div>
+            <button class="text-button" id="show-all-courses" type="button">Ver todos os cursos <span aria-hidden="true">→</span></button>
+          </div>
+
+          <div class="active-filter" id="active-filter" hidden>
+            <span id="active-filter-label"></span>
+            <button type="button" id="clear-filter">Limpar filtro</button>
+          </div>
+          <div class="course-grid" id="course-grid" aria-live="polite"></div>
+          <p class="empty-state" id="empty-state" hidden>Nenhum curso encontrado. Tente buscar por outro termo.</p>
+        </div>
+      </section>
+
+      <section class="story-section section" id="sobre" aria-labelledby="story-title">
+        <div class="story-card shell reveal">
+          <div class="story-image" aria-hidden="true"></div>
+          <div class="story-overlay"></div>
+          <div class="story-copy">
+            <p class="eyebrow light">NOSSA ESSÊNCIA</p>
+            <h2 id="story-title">Mais que receitas,<br><em>um jeito de criar.</em></h2>
+            <p>Nossos cursos nasceram para aproximar a técnica da cozinha real. Você aprende com chefs experientes, pratica no seu tempo e constrói repertório para criar pratos com identidade.</p>
+            <button class="button button-outline contact-trigger" type="button">Conheça nossa história <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="categories-section section" aria-labelledby="categories-title">
+        <div class="shell">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">CATEGORIAS</p>
+              <h2 id="categories-title">Explore do seu jeito</h2>
+            </div>
+            <button class="text-button" id="show-all-categories" type="button">Ver todas as categorias <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="category-list" id="category-list" role="tablist" aria-label="Filtrar por categoria"></div>
+        </div>
+      </section>
+
+      <section class="contact-section section" id="contato" aria-labelledby="contact-title">
+        <div class="contact-card shell">
+          <div class="contact-copy">
+            <p class="eyebrow light">MESA POSTA, IDEIAS SERVIDAS</p>
+            <h2 id="contact-title">Receba novidades<br>fresquinhas.</h2>
+            <p>Novos cursos, aulas abertas e receitas direto no seu e-mail. Sem exagero, só conteúdo que vale levar para a cozinha.</p>
+          </div>
+          <form class="newsletter-form" id="newsletter-form">
+            <label for="newsletter-email">Seu melhor e-mail</label>
+            <div class="newsletter-control">
+              <input id="newsletter-email" type="email" placeholder="voce@exemplo.com" required>
+              <button class="button button-primary" type="submit">Quero receber <span aria-hidden="true">→</span></button>
+            </div>
+            <small>Ao enviar, você concorda em receber comunicações da Cursos.</small>
+          </form>
+        </div>
+      </section>
+    </main>
+    {% endblock %}
+
+    <footer class="site-footer">
+      <div class="footer-grid shell">
+        <div>
+          <a class="brand brand-footer" href="{{ url_for('index') }}">
+            <span class="brand-name">Cursos</span>
+            <span class="brand-caption">GASTRONOMIA ONLINE</span>
+          </a>
+          <p>Conhecimento que transforma ingredientes em boas histórias.</p>
+        </div>
+        <div><h2>Navegue</h2><a href="{{ url_for('index') }}">Início</a><a href="{{ url_for('courses_page') }}">Cursos</a><a href="{{ url_for('about_page') }}">Sobre</a></div>
+        <div><h2>Atendimento</h2><a href="mailto:ola@cursos.com.br">ola@cursos.com.br</a><a href="{{ url_for('contact_page') }}">Fale conosco</a></div>
+        <button class="back-to-top" type="button" aria-label="Voltar ao topo">↑</button>
+      </div>
+      <div class="footer-bottom shell"><span>© 2026 Cursos. Todos os direitos reservados.</span><span>Feito para quem ama cozinhar.</span></div>
+    </footer>
+
+    <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-hidden="true">
+      <div class="drawer-header">
+        <div><p class="eyebrow">SUA SELEÇÃO</p><h2 id="cart-title">Carrinho</h2></div>
+        <button class="close-button" id="close-cart" type="button" aria-label="Fechar carrinho">×</button>
+      </div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-empty" id="cart-empty">
+        <span aria-hidden="true">🍝</span>
+        <h3>Seu carrinho está vazio</h3>
+        <p>Escolha um curso e comece uma nova aventura na cozinha.</p>
+        <button class="button button-dark" id="browse-courses" type="button">Explorar cursos</button>
+      </div>
+      <div class="cart-summary" id="cart-summary" hidden>
+        <div><span>Total</span><strong id="cart-total">R$ 0,00</strong></div>
+        <button class="button button-primary" id="checkout-button" type="button">Finalizar inscrição <span aria-hidden="true">→</span></button>
+      </div>
+    </aside>
+
+    <div class="modal-backdrop" id="course-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+      <div class="course-modal-card">
+        <button class="close-button modal-close" type="button" aria-label="Fechar detalhes">×</button>
+        <div class="modal-image-wrap"><img id="modal-image" src="" alt=""></div>
+        <div class="modal-content">
+          <div class="modal-topline"><span class="pill" id="modal-category"></span><span id="modal-level"></span></div>
+          <h2 id="modal-title"></h2>
+          <p id="modal-description"></p>
+          <div class="modal-stats">
+            <div><strong id="modal-duration"></strong><span>de conteúdo</span></div>
+            <div><strong id="modal-lessons"></strong><span>aulas práticas</span></div>
+            <div><strong>Acesso vitalício</strong><span>estude no seu ritmo</span></div>
+          </div>
+          <h3>O que você vai aprender</h3>
+          <ul id="modal-learnings"></ul>
+          <div class="modal-footer">
+            <div><span>Investimento</span><strong id="modal-price"></strong></div>
+            <button class="button button-primary" id="modal-add-cart" type="button">Adicionar ao carrinho <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>

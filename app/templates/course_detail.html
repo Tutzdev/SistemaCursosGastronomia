@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+
+{% block title %}{{ course.title }} — Cursos{% endblock %}
+
+{% block main %}
+<main id="conteudo" class="inner-page course-detail-page">
+  <section class="course-detail-hero">
+    <div class="shell">
+      <nav class="breadcrumbs dark" aria-label="Navegação estrutural">
+        <a href="{{ url_for('index') }}">Início</a><span>/</span>
+        <a href="{{ url_for('courses_page') }}">Cursos</a><span>/</span>
+        <span>{{ course.title }}</span>
+      </nav>
+
+      <div class="course-detail-grid">
+        <div class="course-detail-image reveal">
+          <img src="{{ url_for('static', filename=course.image) }}" alt="{{ course.title }}">
+          <span class="course-badge {{ 'red' if course.badge in ('Novo', 'Lançamento', 'Formação') else '' }}">{{ course.badge }}</span>
+        </div>
+        <div class="course-detail-copy reveal">
+          <p class="eyebrow">{{ course.category|upper }}</p>
+          <h1>{{ course.title }}</h1>
+          <p class="course-tagline">{{ course.tagline }}</p>
+          <p class="course-long-description">{{ course.description }}</p>
+          <div class="detail-rating"><span aria-hidden="true">★</span><strong>{{ course.rating }}</strong><small>{{ course.reviews }} alunos avaliaram este curso</small></div>
+          <div class="detail-facts">
+            <div><strong>{{ course.duration }}</strong><span>de conteúdo</span></div>
+            <div><strong>{{ course.lessons }} aulas</strong><span>passo a passo</span></div>
+            <div><strong>{{ course.level }}</strong><span>nível do curso</span></div>
+          </div>
+          <div class="detail-purchase">
+            <div><small>Investimento</small><strong>{{ course.price }}</strong><span>ou até 6x sem juros</span></div>
+            <button class="button button-primary" type="button" data-course-add="{{ course.slug }}">Adicionar ao carrinho <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="secure-note"><span aria-hidden="true">✓</span> Pagamento seguro · acesso imediato · certificado incluso</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-content-section section">
+    <div class="shell course-content-shell">
+      <div class="course-tabs" role="tablist" aria-label="Informações do curso">
+        <button class="course-tab active" type="button" role="tab" aria-selected="true" data-tab="overview">Visão geral</button>
+        <button class="course-tab" type="button" role="tab" aria-selected="false" data-tab="program">Programa</button>
+        <button class="course-tab" type="button" role="tab" aria-selected="false" data-tab="instructor">Professor</button>
+      </div>
+
+      <div class="course-tab-panel" data-panel="overview">
+        <div class="content-prose">
+          <p class="eyebrow">RESULTADOS REAIS</p>
+          <h2>O que você vai aprender</h2>
+          <p>Ao final do curso, você terá segurança para repetir as técnicas, adaptar receitas e criar com mais autonomia.</p>
+          <ul class="learning-grid">
+            {% for learning in course.learnings %}
+            <li><span aria-hidden="true">✓</span>{{ learning }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <aside class="certificate-card">
+          <span class="certificate-icon" aria-hidden="true">✦</span>
+          <p class="eyebrow">CERTIFICADO INCLUSO</p>
+          <h3>Seu aprendizado reconhecido</h3>
+          <p>Conclua todas as aulas e receba um certificado digital para compartilhar.</p>
+        </aside>
+      </div>
+
+      <div class="course-tab-panel" data-panel="program" hidden>
+        <div class="content-prose wide">
+          <p class="eyebrow">CONTEÚDO DO CURSO</p>
+          <h2>Uma jornada bem temperada</h2>
+          <p>{{ course.lessons }} aulas organizadas em módulos progressivos, do fundamento à finalização.</p>
+          <div class="module-list">
+            {% for module in course.modules %}
+            <article class="module-item">
+              <button type="button" data-module-toggle aria-expanded="{{ 'true' if loop.first else 'false' }}">
+                <span><small>MÓDULO {{ loop.index|string|upper }}</small><strong>{{ module[0] }}</strong></span>
+                <span class="module-plus" aria-hidden="true">+</span>
+              </button>
+              <div class="module-lessons" {% if not loop.first %}hidden{% endif %}>
+                {% for lesson in module[1] %}<span><b aria-hidden="true">▶</b>{{ lesson }}</span>{% endfor %}
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="course-tab-panel" data-panel="instructor" hidden>
+        <div class="instructor-panel">
+          <div class="instructor-avatar" aria-hidden="true">{{ course.instructor.split()[1][0] }}{{ course.instructor.split()[-1][0] }}</div>
+          <div>
+            <p class="eyebrow">QUEM VAI ENSINAR</p>
+            <h2>{{ course.instructor }}</h2>
+            <strong>{{ course.instructor_role }}</strong>
+            <p>{{ course.instructor_bio }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-cta-strip">
+    <div class="shell site-cta-inner">
+      <div><p class="eyebrow light">PRONTO PARA COMEÇAR?</p><h2>Leve essa experiência para a sua cozinha.</h2></div>
+      <button class="button button-primary" type="button" data-course-add="{{ course.slug }}">Quero este curso <span aria-hidden="true">→</span></button>
+    </div>
+  </section>
+</main>
+{% endblock %}

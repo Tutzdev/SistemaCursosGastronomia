@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+{% block title %}Todos os cursos — Cursos{% endblock %}
+
+{% block main %}
+<main id="conteudo" class="inner-page">
+  <section class="page-hero catalog-page-hero">
+    <div class="shell page-hero-content reveal">
+      <nav class="breadcrumbs" aria-label="Navegação estrutural">
+        <a href="{{ url_for('index') }}">Início</a><span>/</span><span>Cursos</span>
+      </nav>
+      <p class="eyebrow light">CATÁLOGO COMPLETO</p>
+      <h1>Encontre o curso<br><em>certo para você</em></h1>
+      <p>Explore formações práticas para todos os momentos da sua jornada na cozinha.</p>
+    </div>
+  </section>
+
+  <section class="catalog-page-section section" aria-labelledby="catalog-title">
+    <div class="shell">
+      <div class="section-heading catalog-heading">
+        <div>
+          <p class="eyebrow">APRENDA NO SEU RITMO</p>
+          <h2 id="catalog-title">Todos os cursos</h2>
+          <p class="catalog-result-count" id="catalog-result-count">6 cursos disponíveis</p>
+        </div>
+      </div>
+
+      <div class="catalog-controls">
+        <form class="catalog-search" id="catalog-search-form" role="search">
+          <label class="sr-only" for="catalog-search-input">Buscar no catálogo</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+          <input id="catalog-search-input" type="search" placeholder="O que você quer aprender?" autocomplete="off">
+          <button type="submit">Buscar</button>
+        </form>
+        <label class="level-control">
+          <span>Nível</span>
+          <select id="level-filter">
+            <option value="all">Todos os níveis</option>
+            <option value="iniciante">Iniciante</option>
+            <option value="intermediario">Intermediário</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="catalog-category-heading">
+        <span>Filtrar por categoria</span>
+        <button class="text-button" id="show-all-categories" type="button">Limpar seleção <span aria-hidden="true">×</span></button>
+      </div>
+      <div class="category-list catalog-categories" id="category-list" role="tablist" aria-label="Filtrar por categoria"></div>
+
+      <div class="active-filter" id="active-filter" hidden>
+        <span id="active-filter-label"></span>
+        <button type="button" id="clear-filter">Limpar filtro</button>
+      </div>
+      <div class="course-grid catalog-course-grid" id="course-grid" aria-live="polite"></div>
+      <p class="empty-state" id="empty-state" hidden>Nenhum curso encontrado. Tente buscar por outro termo.</p>
+    </div>
+  </section>
+
+  <section class="site-cta-strip">
+    <div class="shell site-cta-inner">
+      <div><p class="eyebrow light">PRECISA DE AJUDA?</p><h2>Vamos escolher juntos.</h2></div>
+      <a class="button button-outline" href="{{ url_for('contact_page') }}">Falar com a equipe <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+{% endblock %}
