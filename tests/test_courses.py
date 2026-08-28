@@ -57,7 +57,7 @@ def test_course_detail_orders_modules_and_lessons(client, app, create_course) ->
                 Lesson(title="A", video_url="https://example.com/a", position=1),
             ]
         )
-        db.session.add(first)
+        db.session.add_all([first, second])
         db.session.commit()
 
     response = client.get(f"/api/courses/{course.id}")
@@ -84,9 +84,7 @@ def test_real_course_integrates_with_enrollment(
     client, auth_headers, create_course
 ) -> None:
     course = create_course()
-    enrolled = client.post(
-        f"/api/courses/{course.id}/enroll", headers=auth_headers
-    )
+    enrolled = client.post(f"/api/courses/{course.id}/enroll", headers=auth_headers)
     mine = client.get("/api/users/me/courses", headers=auth_headers)
 
     assert enrolled.status_code == 201

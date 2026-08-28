@@ -12,7 +12,7 @@ auth_blueprint = Blueprint("auth", __name__, url_prefix="/api/auth")
 def register() -> tuple[Response, int]:
     data = validate_registration_payload(request.get_json(silent=True))
     user = register_user(data)
-    
+
     return jsonify({"data": serialize_user(user)}), 201
 
 

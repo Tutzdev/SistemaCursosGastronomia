@@ -33,7 +33,7 @@ def register_user(data: RegistrationData) -> User:
     except IntegrityError as error:
         db.session.rollback()
         raise EmailAlreadyRegisteredError() from error
-    
+
     return user
 
 
@@ -42,7 +42,7 @@ def authenticate_user(data: LoginData) -> str:
     if user is None or not verify_password(data.password, user.password_hash):
         # A resposta é genérica para não revelar quais e-mails estão cadastrados.
         raise InvalidCredentialsError()
-    
+
     return create_access_token(identity=str(user.id))
 
 
@@ -59,5 +59,5 @@ def get_current_user() -> User:
     user = db.session.get(User, user_id)
     if user is None:
         raise UserNotFoundError()
-    
+
     return user

@@ -4,6 +4,7 @@ from datetime import timedelta
 from flask import Flask, Response, abort, jsonify, render_template
 
 from app.config import load_environment_config, validate_app_config
+from app.courses.seed import register_seed_command
 from app.errors import register_error_handlers
 from app.extensions import cors, db, jwt, migrate
 from app.jwt_callbacks import register_jwt_callbacks
@@ -33,8 +34,6 @@ def create_app(config_object: object | None = None) -> Flask:
     _register_blueprints(app)
     register_error_handlers(app)
     register_jwt_callbacks(app)
-    from app.courses.seed import register_seed_command
-
     register_seed_command(app)
 
     return app

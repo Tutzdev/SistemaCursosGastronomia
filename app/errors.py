@@ -74,7 +74,7 @@ def error_response(
     )
     if status_code == HTTPStatus.UNAUTHORIZED:
         response.headers["WWW-Authenticate"] = "Bearer"
-        
+
     return response, status_code
 
 

@@ -12,25 +12,25 @@ MAX_NAME_LENGTH = 120
 
 @dataclass(frozen=True)
 class RegistrationData:
-    name:     str
-    email:    str
+    name: str
+    email: str
     password: str
 
 
 @dataclass(frozen=True)
 class LoginData:
-    email:    str
+    email: str
     password: str
 
 
 def normalize_email(email: str) -> str:
     normalized = email.strip().lower()
-    
+
     try:
         result = validate_email(normalized, check_deliverability=False)
     except EmailNotValidError as error:
         raise ValidationError({"email": "Informe um e-mail válido."}) from error
-    
+
     return result.normalized.lower()
 
 
@@ -38,7 +38,7 @@ def _require_string(payload: Mapping[str, object], field: str) -> str:
     value = payload.get(field)
     if not isinstance(value, str):
         raise ValidationError({field: "Este campo é obrigatório."})
-    
+
     return value
 
 
@@ -93,5 +93,5 @@ def validate_login_payload(payload: object) -> LoginData:
 
     if not password:
         raise ValidationError({"password": "Este campo é obrigatório."})
-    
+
     return LoginData(email=email, password=password)

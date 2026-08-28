@@ -33,21 +33,24 @@ def seed_courses() -> None:
             password_hash=hash_password("demo-password-change-me"),
             role=UserRole.INSTRUCTOR,
         )
+
         db.session.add(instructor)
 
     for title, category_name, slug, level in COURSES:
         if db.session.scalar(select(Course.id).where(Course.title == title)):
             continue
+
         category = db.session.scalar(select(Category).where(Category.slug == slug))
         if category is None:
             category = Category(name=category_name, slug=slug)
+
             db.session.add(category)
+
         course = Course(
             title=title,
             description=f"Curso demonstrativo de {title.lower()}.",
             thumbnail_url=(
-                "https://images.unsplash.com/photo-1547592180-85f173990554"
-                f"?{slug}"
+                f"https://images.unsplash.com/photo-1547592180-85f173990554?{slug}"
             ),
             level=level,
             instructor=instructor,
@@ -66,7 +69,9 @@ def seed_courses() -> None:
                     )
                 )
             course.modules.append(module)
+
         db.session.add(course)
+
     db.session.commit()
 
 

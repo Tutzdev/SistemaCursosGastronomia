@@ -15,6 +15,7 @@ def serialize_course(course: Course, *, detailed: bool = False) -> dict[str, obj
         "category": serialize_category(course.category),
         "instructor": {"id": course.instructor.id, "name": course.instructor.name},
     }
+
     if detailed:
         data["modules"] = [
             {
@@ -35,4 +36,5 @@ def serialize_course(course: Course, *, detailed: bool = False) -> dict[str, obj
             }
             for module in course.modules
         ]
+
     return data

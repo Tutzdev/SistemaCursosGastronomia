@@ -20,6 +20,7 @@ def list_courses(
         statement = statement.where(
             or_(Course.title.ilike(pattern), Course.description.ilike(pattern))
         )
+
     if category:
         statement = statement.join(Course.category).where(Category.slug == category)
     if level:
@@ -28,6 +29,7 @@ def list_courses(
         except ValueError as error:
             raise ValidationError({"level": "Nível inválido."}) from error
         statement = statement.where(Course.level == normalized_level)
+
     return list(db.session.scalars(statement).all())
 
 
@@ -44,6 +46,7 @@ def get_course(course_id: int) -> Course:
     course = db.session.scalar(statement)
     if course is None:
         raise CourseNotFoundError()
+
     return course
 
 

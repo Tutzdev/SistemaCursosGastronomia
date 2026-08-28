@@ -2,7 +2,8 @@ import os
 from datetime import timedelta
 
 
-class ConfigurationError(RuntimeError): pass
+class ConfigurationError(RuntimeError):
+    pass
 
 
 def _read_positive_int(name: str, default: int) -> int:
@@ -14,7 +15,7 @@ def _read_positive_int(name: str, default: int) -> int:
 
     if value <= 0:
         raise ConfigurationError(f"{name} deve ser maior que zero.")
-    
+
     return value
 
 
@@ -27,7 +28,7 @@ def _read_origins() -> list[str]:
     origins = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
     if not origins or "*" in origins:
         raise ConfigurationError("CORS_ALLOWED_ORIGINS deve listar origens explícitas.")
-    
+
     return origins
 
 

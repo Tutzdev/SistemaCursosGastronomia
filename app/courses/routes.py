@@ -13,14 +13,19 @@ def courses() -> tuple[Response, int]:
         request.args.get("category"),
         request.args.get("level"),
     )
+
     return jsonify({"data": [serialize_course(item) for item in items]}), 200
 
 
 @courses_blueprint.get("/courses/<int:course_id>")
 def course_detail(course_id: int) -> tuple[Response, int]:
-    return jsonify({"data": serialize_course(get_course(course_id), detailed=True)}), 200
+    return jsonify(
+        {"data": serialize_course(get_course(course_id), detailed=True)}
+    ), 200
 
 
 @courses_blueprint.get("/categories")
 def categories() -> tuple[Response, int]:
-    return jsonify({"data": [serialize_category(item) for item in list_categories()]}), 200
+    return jsonify(
+        {"data": [serialize_category(item) for item in list_categories()]}
+    ), 200

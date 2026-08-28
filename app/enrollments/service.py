@@ -19,12 +19,13 @@ def enroll_user(user: User, course_id: int) -> Enrollment:
             Enrollment.course_id == course_id,
         )
     )
-    
+
     if existing_enrollment is not None:
         raise AlreadyEnrolledError()
 
     enrollment = Enrollment(user_id=user.id, course_id=course_id)
     db.session.add(enrollment)
+
     try:
         db.session.commit()
     except IntegrityError as error:
@@ -32,10 +33,11 @@ def enroll_user(user: User, course_id: int) -> Enrollment:
 
         if not course_exists(course_id):
             raise CourseNotFoundError() from error
-        
+
         raise AlreadyEnrolledError() from error
-    
+
     return enrollment
 
 
-def list_user_courses(user: User) -> Sequence[Mapping[str, object]]: return get_courses_for_user(user.id)
+def list_user_courses(user: User) -> Sequence[Mapping[str, object]]:
+    return get_courses_for_user(user.id)

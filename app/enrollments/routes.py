@@ -12,5 +12,5 @@ enrollments_blueprint = Blueprint("enrollments", __name__, url_prefix="/api")
 @jwt_required()
 def enroll(course_id: int) -> tuple[Response, int]:
     enrollment = enroll_user(get_current_user(), course_id)
-    
+
     return jsonify({"data": serialize_enrollment(enrollment)}), 201

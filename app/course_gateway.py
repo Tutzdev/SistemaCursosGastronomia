@@ -19,7 +19,7 @@ def _get_course_table() -> Table:
 
     if "id" not in course_table.c:
         raise CourseIntegrationUnavailableError()
-    
+
     return course_table
 
 

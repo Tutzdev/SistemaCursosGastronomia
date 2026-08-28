@@ -16,5 +16,5 @@ def my_courses() -> tuple[Response, int]:
         {key: serialize_scalar(value) for key, value in course.items()}
         for course in courses
     ]
-    
+
     return jsonify({"data": data}), 200
